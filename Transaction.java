@@ -27,4 +27,4 @@ public class Transaction implements HasMenu {
 	public void printTransaction() {
 		System.out.println("Date: " + this.date + " | Amount: $" + this.amount + " | Memo: " + this.memo);
 	}
-}
+
