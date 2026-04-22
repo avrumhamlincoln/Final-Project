@@ -18,6 +18,7 @@ classDiagram
         + login() boolean
         + getTracker() PersonalTracker
         + getReport() void
+        # getDouble()
         + menu() void
         + start() void
     }
@@ -34,7 +35,7 @@ classDiagram
 
     class PersonalTracker {
         - balanceGoal: double
-        - balance: double
+        + balance: double
         - transactions: TransList
         - PersonalTracker() const
         + setBalanceGoal(goal: double) void
@@ -125,8 +126,18 @@ getTracker()
     returns tracker class for user
 getReport()
     returns all transactions for user
+getDouble()
+    returns double
 menu()
     handles menu
 start()
 ```
 
+# PersoalUser extends User
+```
+PersonalUser()
+    null constructor
+
+Start()
+    handles menu and logic
+```

@@ -55,6 +55,23 @@ public abstract class User implements HasMenu{
 	public void getReport(){
 		this.personalTracker.getTransactions();
 	}
+	
+	private double getDouble(){
+		Scanner input =  new Scanner(System.in);
+		String restultString = input.nextLine();
+		double result = 0d;
+
+		try{
+			result = Double.parseDouble(restultString);
+		}
+
+		catch (Exception e){
+			System.out.println("Not a good value. Changing to 0");
+			result = 0d;
+		}
+
+		return result;
+	}
 
 	public void menu(){
 		System.out.println("---User Menu---");

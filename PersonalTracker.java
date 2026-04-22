@@ -2,7 +2,7 @@ import java.util.*;
 
 public class PersonalTracker{
 	private double balanceGoal;
-	private double balance;
+	public double balance;
 	private TransList transactions;
 
 	public PersonalTracker(){
