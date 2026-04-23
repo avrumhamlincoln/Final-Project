@@ -24,25 +24,16 @@ public abstract class User implements HasMenu{
 		Scanner input = new Scanner(System.in);
 		boolean result = false;
 
-		System.out.print("\nUsername: ");
-		String userNameIn = input.nextLine();
+		System.out.print("Password: ");
+		String passwordIn = input.nextLine();
 
-		if (userNameIn.equals(this.username)){
-			System.out.print("Password: ");
-			String passwordIn = input.nextLine();
-
-			if (passwordIn.equals(this.password)){
-				System.out.println("\nLogin Successful! Welcome " + this.username);
-				result = true;
-			}
-
-			else{
-				System.out.println("\nIncorrect Password");
-			}
+		if (passwordIn.equals(this.password)){
+			System.out.println("\nLogin Successful! Welcome " + this.username);
+			result = true;
 		}
 
 		else{
-			System.out.println("\nIncorrect Username");
+			System.out.println("\nIncorrect Password");
 		}
 
 		return result;
@@ -71,6 +62,10 @@ public abstract class User implements HasMenu{
 		}
 
 		return result;
+	}
+
+	public String getUsername(){
+		return this.username;
 	}
 
 	public void menu(){
