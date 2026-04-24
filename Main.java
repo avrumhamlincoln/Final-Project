@@ -38,6 +38,8 @@ public class Main{
 			if (choice.equals("1")){
 				if (masterList.isEmpty()){
 					System.out.println("\nNo accounts exist yet! Please create one first ;)");
+					User newUser = new PersonalUser();
+					masterList.add(newUser);
 				}
 				
 				System.out.println("\n---Budget Buddy Login---");
