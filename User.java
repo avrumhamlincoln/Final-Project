@@ -71,11 +71,20 @@ public class User implements HasMenu{
 		return this.username;
 	}
 
-	/*
+	
 	public void menu(){
-		System.out.println("---User Menu---");
 	}
-	*/
+	
+	public void addFamilyMember(User user){
+		if (this.familyMembers.contains(user)){
+			System.out.println("This user is already in your household!");
+		}
+
+		else {
+			this.familyMembers.add(user);
+			System.out.println(user.getUsername() + " successfully added to your household!");
+		}
+	}
 
 	public void start() {
 		Scanner input = new Scanner(System.in);
@@ -86,11 +95,12 @@ public class User implements HasMenu{
 		System.out.println("0) Logout");
 		System.out.print("Choice: ");
 		String choice = input.nextLine();
+		boolean keepGoing2 = true;
 
 		if (choice.equals("1")){
 			System.out.println("\n---Your Household Dashbord---");
 		
-			while(keepGoing){
+			while(keepGoing2){
 				System.out.println("\nWhat would you like to do?");
 				System.out.println("1) Record Income");
 				System.out.println("2) Record Expense");
@@ -99,7 +109,7 @@ public class User implements HasMenu{
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
 	
-				String choice = input.nextLine();
+				choice = input.nextLine();
 	
 				if (choice.equals("1")){
 					System.out.print("Enter Date [MM/DD/YYYY]: ");
@@ -149,7 +159,7 @@ public class User implements HasMenu{
 	
 				else if (choice.equals("0")){
 					System.out.println("Logging out");
-					keepGoing = false;
+					keepGoing2 = false;
 				}	
 	
 				else{
@@ -159,7 +169,6 @@ public class User implements HasMenu{
 		}
 
 		else if (choice.equals("2")){
-			Scanner input = new Scanner(System.in);
 			boolean keepGoing = true;
 	
 			System.out.println("\n---Your Household Dashbord---");
@@ -175,11 +184,11 @@ public class User implements HasMenu{
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
 	
-				String choice = input.nextLine();
+				choice = input.nextLine();
 	
 				if (choice.equals("1")){
 					double grandTotal = 0.0;
-					grandTotal += super.personalTracker.getBalance();
+					grandTotal += this.personalTracker.getBalance();
 	
 					for (User user : familyMembers){
 						PersonalTracker tracker  = user.getTracker();
@@ -199,7 +208,7 @@ public class User implements HasMenu{
 				}
 
 				else if (choice.equals("3")){
-					super.getReport();
+					this.getReport();
 				}
 	
 				else if (choice.equals("4")){
@@ -214,7 +223,7 @@ public class User implements HasMenu{
 	
 					Transaction t = new Transaction(date, amount, memo);
 					t.incomeTrans(this.personalTracker);
-					super.personalTracker.storeTransaction(t);
+					this.personalTracker.storeTransaction(t);
 	
 					System.out.println("Income recorded!");
 				}
@@ -231,22 +240,22 @@ public class User implements HasMenu{
 	
         	                        Transaction t = new Transaction(date, amount, memo);
                 	                t.expenseTrans(this.personalTracker);
-                        	        super.personalTracker.storeTransaction(t);
+                        	        this.personalTracker.storeTransaction(t);
 
          	                       System.out.println("Expense recorded!");
                		         }
 
 				else if (choice.equals("6")){
-					boolean keepGoing2 = true;
+					boolean keepGoing3 = true;
 	
-					while (keepGoing2) {
+					while (keepGoing3) {
 						System.out.print("Enter the username of the person you want to add or enter 0 to go back: ");
 						String username = input.nextLine();
 						
 						boolean found = false;
 	
 						if (username.equals("0")){
-							keepGoing2 = false;
+							keepGoing3 = false;
 							found = true;
 						}
 	
@@ -254,7 +263,7 @@ public class User implements HasMenu{
 							if (user.getUsername().equals(username)){
 								this.addFamilyMember(user);
 								found = true;
-								keepGoing2 = false;
+								keepGoing3 = false;
 							}
 						}
 		
