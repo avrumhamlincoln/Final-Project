@@ -36,7 +36,13 @@ public class Transaction{
 	}
 
 	public String getFormattedAmount(){
-		return this.formattedAmount;
+		if (this.amount < 0){
+			return String.format("%.02f", Math.abs(this.amount));
+		}
+
+		else {
+			return this.formattedAmount;
+		}
 	}
 }
 

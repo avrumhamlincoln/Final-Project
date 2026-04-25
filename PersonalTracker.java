@@ -95,20 +95,20 @@ public class PersonalTracker{
 			System.out.println("\nYou are in the negative!!! Save money quick to return to the positives!");
 		}
 
-                if (balance > balanceGoal){
+		else if (balance > balanceGoal){
                          double over;
-                         over = balance - balanceGoal;
+                         over = getBalance() - balanceGoal;
 			 String overf = String.format("%.2f", over);
                          System.out.println("You are $" + overf + " over budget!\n");
                 }
 
-                if (balance == balanceGoal){
+		else if (balance == balanceGoal){
                         System.out.println("\nYou are at your budget goal! You are exactly where you wanted to be. Give yourelf a pat on the back!\n");
                 }
 
-                if (balance <  balanceGoal){
+		else if (balance <  balanceGoal){
                         double under;
-                        under = balanceGoal - balance;
+                        under = balanceGoal - getBalance();
 			String underf = String.format("%.2f", under);
                         System.out.println("You are $" + underf + " under budget!\n");
 		}

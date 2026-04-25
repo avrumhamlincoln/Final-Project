@@ -41,11 +41,16 @@ public class Main{
 							user.start();
 						}
 					}
-				}
 
+					else {
+						System.out.println("\nUsername not found. :/");
+						found = true;
+					}
+				}
+				/*
 				if (!found){
 					System.out.println("\nUsername not found. :/");
-				}
+				}*/
 			}
 
 			else if (choice.equals("2")){

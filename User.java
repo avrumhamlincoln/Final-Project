@@ -122,7 +122,7 @@ public class User implements HasMenu{
 	
 					System.out.print("Enter Amount: $");
 					double amount = this.getDouble();
-	
+
 					System.out.print("Enter Memo: ");
 					String memo = input.nextLine();
 	
@@ -139,6 +139,7 @@ public class User implements HasMenu{
 	
         	                        System.out.print("Enter Amount: $");
                 	                double amount = this.getDouble();
+					amount = amount * -1;
 	
         	                        System.out.print("Enter Memo: ");
                 	                String memo = input.nextLine();
