@@ -17,8 +17,11 @@ public class User implements HasMenu{
 		System.out.print("Create a Password: ");
 		this.password = input.nextLine();
 
-		System.out.println("Profile created successfully for " + this.username + "! Nice to meet you ;)");
-		this.personalTracker = new PersonalTracker();
+		System.out.print("Set your initial savings goal: $");
+		double goal = this.getDouble();
+
+		System.out.println("\nProfile created successfully for " + this.username + "! Nice to meet you ;)");
+		this.personalTracker = new PersonalTracker(goal);
 		this.familyMembers = new UserList();
 		this.familyMembers.add(this);
 	} 
@@ -60,7 +63,7 @@ public class User implements HasMenu{
 		}
 
 		catch (Exception e){
-			System.out.println("Not a good value. Changing to 0");
+			System.out.println("\nNot a good value. Changing to 0");
 			result = 0d;
 		}
 
@@ -77,12 +80,12 @@ public class User implements HasMenu{
 	
 	public void addFamilyMember(User user){
 		if (this.familyMembers.contains(user)){
-			System.out.println("This user is already in your household!");
+			System.out.println("\nThis user is already in your household!");
 		}
 
 		else {
 			this.familyMembers.add(user);
-			System.out.println(user.getUsername() + " successfully added to your household!");
+			System.out.println("\n" + user.getUsername() + " successfully added to your household!");
 		}
 	}
 
@@ -91,21 +94,22 @@ public class User implements HasMenu{
 
 		System.out.println("\n---" + this.username + "'s Dashboard---");
 		System.out.println("1) Personal Budgeting");
-		System.out.println("2) Household Management");
+		System.out.println("2) Household Budgeting");
+		//System.out.println("3) Delete Profile");
 		System.out.println("0) Logout");
 		System.out.print("Choice: ");
 		String choice = input.nextLine();
 		boolean keepGoing2 = true;
 
 		if (choice.equals("1")){
-			System.out.println("\n---Your Household Dashbord---");
+			System.out.println("\n---Your Personal Dashbord---");
 		
 			while(keepGoing2){
 				System.out.println("\nWhat would you like to do?");
 				System.out.println("1) Record Income");
 				System.out.println("2) Record Expense");
 				System.out.println("3) Set Budget Goal");
-				System.out.println("4) View Your Report");
+				System.out.println("4) View Your Transaction Report");
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
 	
@@ -125,7 +129,7 @@ public class User implements HasMenu{
 					t.incomeTrans(this.personalTracker);
 					this.personalTracker.storeTransaction(t);
 	
-					System.out.println("Income recorded!");
+					System.out.println("\nIncome recorded!");
 				}
 	
 				else if (choice.equals("2")){
@@ -142,7 +146,7 @@ public class User implements HasMenu{
                 	                t.expenseTrans(this.personalTracker);
                         	        this.personalTracker.storeTransaction(t);
 	
-					System.out.println("Expense recorded!");
+					System.out.println("\nExpense recorded!");
 				}
 	
 				else if (choice.equals("3")){
@@ -150,11 +154,12 @@ public class User implements HasMenu{
 					double goal = this.getDouble();
 	
 					this.personalTracker.setBalanceGoal(goal);
-					System.out.println("Budget goal updated!");
+					System.out.println("\nBudget goal updated!");
 				}
 	
 				else if (choice.equals("4")){
 					this.getReport();
+					this.personalTracker.getTranSumary();
 				}
 	
 				else if (choice.equals("0")){
@@ -163,7 +168,7 @@ public class User implements HasMenu{
 				}	
 	
 				else{
-					System.out.println("Invalid choice. Please enter a number 0-4.");
+					System.out.println("\nInvalid choice. Please enter a number 0-4.");
 				}
 			}
 		}
@@ -176,11 +181,9 @@ public class User implements HasMenu{
 			while (keepGoing){
 				System.out.println("\nWhat would you like to do?");
 				System.out.println("1) View Combined Household Total");
-				System.out.println("2) View Household Transactions");
-				System.out.println("3) View My Personal Report");
-				System.out.println("4) Record Personal Income");
-				System.out.println("5) Record Personal Expense");
-				System.out.println("6) Add a Family Member");
+				System.out.println("2) View Household Transaction Report");
+				System.out.println("3) Add a Family Member");
+				System.out.println("4) Remove a Family Member");
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
 	
@@ -208,44 +211,6 @@ public class User implements HasMenu{
 				}
 
 				else if (choice.equals("3")){
-					this.getReport();
-				}
-	
-				else if (choice.equals("4")){
-					System.out.print("Enter Date [MM/DD/YYYY]: ");
-					String date = input.nextLine();
-	
-					System.out.print("Enter Amount: $");
-					double amount = this.getDouble();
-	
-					System.out.print("Enter Memo: ");
-					String memo = input.nextLine();
-	
-					Transaction t = new Transaction(date, amount, memo);
-					t.incomeTrans(this.personalTracker);
-					this.personalTracker.storeTransaction(t);
-	
-					System.out.println("Income recorded!");
-				}
-	
-				else if (choice.equals("5")){
-                	                System.out.print("Enter Date [MM/DD/YYYY]: ");
-                        	        String date = input.nextLine();
-	
-        	                        System.out.print("Enter Amount: $");
-                	                double amount = this.getDouble();
-	
-        	                        System.out.print("Enter Memo: ");
-                	                String memo = input.nextLine();
-	
-        	                        Transaction t = new Transaction(date, amount, memo);
-                	                t.expenseTrans(this.personalTracker);
-                        	        this.personalTracker.storeTransaction(t);
-
-         	                       System.out.println("Expense recorded!");
-               		         }
-
-				else if (choice.equals("6")){
 					boolean keepGoing3 = true;
 	
 					while (keepGoing3) {
@@ -268,10 +233,70 @@ public class User implements HasMenu{
 						}
 		
 						if (!found){
-							System.out.println("The user you are looking for does not exist. Try again!");
+							System.out.println("\nThe user you are looking for does not exist. Try again!");
 						}
 					}
 				}
+
+				else if (choice.equals("4")){
+                                        boolean keepGoing4 = true;
+
+                                        while (keepGoing4) {
+                                                System.out.print("\nEnter the username of the person you want to remove or enter 0 to go back: ");
+                                                String username = input.nextLine();
+
+                                                boolean found = false;
+						boolean removing = true;
+
+                                                if (username.equals("0")){
+                                                        keepGoing4 = false;
+                                                        found = true;
+                                                }
+						
+						int i = 0;
+
+						while (i < this.familyMembers.size()){
+							User user = this.familyMembers.get(i);
+							if (user.getUsername().equals(username)){
+								if (user == this){
+									System.out.println("\nYou cannot remove yourself from your own household!");
+								}
+
+								else {
+									this.familyMembers.remove(i);
+									System.out.println("\n" + username + " has been removed from your household.");	
+								}
+
+								found = true;
+								keepGoing4 = false;
+							}
+
+							i++;
+						}
+                                                
+						/*for (User user : this.familyMembers){
+                                                        if (user.getUsername().equals(username)){
+								if (user == this){
+									System.out.println("You cannot remove yourself from your own household!");
+                                        			}
+
+								else {
+									this.familyMembers.remove(user);
+									System.out.println(username + " has been removed from your household.");
+								}
+
+								found = true;
+								keepGoing4 = false;
+                                                        }
+                                                }
+
+						*/
+
+                                                if (!found){
+                                                        System.out.println("\nThe user you are looking for is not in your household. Try again!");
+                                                }
+                                        }
+                                }
 
 				else if (choice.equals("0")){
 					System.out.println("Logging out");
@@ -279,7 +304,7 @@ public class User implements HasMenu{
 				}
 	
 				else {
-					System.out.println("Invalid choice. Please enter a number 0-6.");	
+					System.out.println("\nInvalid choice. Please enter a number 0-4.");	
 				}
 			}
 		}	
@@ -288,7 +313,7 @@ public class User implements HasMenu{
 		}
 
 		else {
-		System.out.println("Invalid choice. Please enter a number 0-2.");
+		System.out.println("\nInvalid choice. Please enter a number 0-2.");
 		}
 	}
 }

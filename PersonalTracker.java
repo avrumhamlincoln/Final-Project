@@ -4,17 +4,33 @@ public class PersonalTracker{
 	private double balanceGoal;
 	public double balance;
 	private TransList transactions;
+	private String formattedBalanceGoal;
+	private String formattedBalance;
 
-	public PersonalTracker(){
-		this.balanceGoal = 0.0;
-		this.balance = 0.0;
+	public PersonalTracker(double goal){
+		if (goal > 0){
+                        this.balanceGoal = goal;
+                }
+
+                else {
+                        System.out.println("\nYou must have a positive goal. I am setting it to 0. You can change it later!");
+                        this.balanceGoal = 0;
+                }
+
+		this.balance = 0.00;
 		this.transactions = new TransList();
 	}
 
 	public void setBalanceGoal(double goal){
-		this.balanceGoal = goal;
-	}
+		if (goal > 0){
+			this.balanceGoal = goal;
+		}
 
+		else {
+			System.out.println("\nYou must have a positive goal. I am setting it to 0. You can change it later!");
+			this.balanceGoal = 0;
+		}
+	}
 	public void increaseBalance(double amount){
 		this.balance = this.balance + amount;
 	}
@@ -37,7 +53,7 @@ public class PersonalTracker{
 		System.out.println("\n--- Transaction History ---");
 
 		if (this.transactions.size() == 0){
-			System.out.println("No transactions to review yet.");
+			System.out.println("\nNo transactions to review yet.");
 		}
 
 		for (Transaction transaction : transactions){
@@ -45,7 +61,7 @@ public class PersonalTracker{
 			transaction.printTransaction();
 			tranNum += 1;
 		}
-
+		/*
 		System.out.println("\n--- Budget Overview ---");
 		System.out.println("Target Balance: $" + balanceGoal);
 		System.out.println("Current Balance: $" + balance);
@@ -64,6 +80,38 @@ public class PersonalTracker{
 			double under;
 			under = balanceGoal - balance;
 			System.out.println("You are $" + under + " under budget!\n");
+		}
+		*/
+	}
+
+	public void getTranSumary(){
+		this.formattedBalanceGoal = String.format("%.2f", balanceGoal);
+		this.formattedBalance = String.format("%.2f", balance);
+
+		System.out.println("\n--- Budget Overview ---");
+                System.out.println("Target Balance: $" + this.formattedBalanceGoal);
+                System.out.println("Current Balance: $" + this.formattedBalance);
+	
+		if (balance < 0){
+			System.out.println("\nYou are in the negative!!! Save money quick to return to the positives!");
+		}
+
+                if (balance > balanceGoal){
+                         double over;
+                         over = balance - balanceGoal;
+			 String overf = String.format("%.2f", over);
+                         System.out.println("You are $" + overf + " over budget!\n");
+                }
+
+                if (balance == balanceGoal){
+                        System.out.println("\nYou are at your budget goal! You are exactly where you wanted to be. Give yourelf a pat on the back!\n");
+                }
+
+                if (balance <  balanceGoal){
+                        double under;
+                        under = balanceGoal - balance;
+			String underf = String.format("%.2f", under);
+                        System.out.println("You are $" + underf + " under budget!\n");
 		}
 	}
 }
