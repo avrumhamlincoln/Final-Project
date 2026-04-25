@@ -44,7 +44,12 @@ public class PersonalTracker{
 	}
 
 	public double getBalance(){
-		return this.balance;
+		double bal = 0.00;
+		for (Transaction transaction : this.transactions){
+			bal += transaction.getAmount();
+		}
+
+		return bal;
 	}
 
 	public void getTransactions(){
@@ -61,32 +66,26 @@ public class PersonalTracker{
 			transaction.printTransaction();
 			tranNum += 1;
 		}
-		/*
-		System.out.println("\n--- Budget Overview ---");
-		System.out.println("Target Balance: $" + balanceGoal);
-		System.out.println("Current Balance: $" + balance);
+	}
 
-		if (balance > balanceGoal){
-			 double over;
-			 over = balance - balanceGoal;
-			 System.out.println("You are $" + over + " over budget!\n");
+	public void removeLastTran(){
+		if (this.transactions.isEmpty()){
+			System.out.println("There are no transactions to remove!");
+			return;
 		}
 
-		if (balance == balanceGoal){
-			System.out.println("You are at your budget goal! You are exactly where you wanted to be. Give yourelf a pat on the back!\n");
-		}
+		else {
+			int lastTranNum = this.transactions.size() - 1;
+			Transaction lastTran = this.transactions.get(lastTranNum);
+			this.transactions.remove(lastTranNum);
 
-		if (balance <  balanceGoal){
-			double under;
-			under = balanceGoal - balance;
-			System.out.println("You are $" + under + " under budget!\n");
+			System.out.println("Success! Removed: " + lastTran.getMemo() + " for $" + lastTran.getFormattedAmount());
 		}
-		*/
 	}
 
 	public void getTranSumary(){
 		this.formattedBalanceGoal = String.format("%.2f", balanceGoal);
-		this.formattedBalance = String.format("%.2f", balance);
+		this.formattedBalance = String.format("%.2f", getBalance());
 
 		System.out.println("\n--- Budget Overview ---");
                 System.out.println("Target Balance: $" + this.formattedBalanceGoal);

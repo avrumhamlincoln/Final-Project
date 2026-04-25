@@ -26,5 +26,17 @@ public class Transaction{
 	public void printTransaction() {
 		System.out.println("Date: " + this.date + " | Amount: $" + this.formattedAmount + " | Memo: " + this.memo);
 	}
+
+	public String getMemo(){
+		return this.memo;	
+	}
+
+	public double getAmount(){
+		return this.amount;
+	}
+
+	public String getFormattedAmount(){
+		return this.formattedAmount;
+	}
 }
 

@@ -95,7 +95,7 @@ public class User implements HasMenu{
 		System.out.println("\n---" + this.username + "'s Dashboard---");
 		System.out.println("1) Personal Budgeting");
 		System.out.println("2) Household Budgeting");
-		//System.out.println("3) Delete Profile");
+		System.out.println("3) Delete Account");
 		System.out.println("0) Logout");
 		System.out.print("Choice: ");
 		String choice = input.nextLine();
@@ -108,8 +108,9 @@ public class User implements HasMenu{
 				System.out.println("\nWhat would you like to do?");
 				System.out.println("1) Record Income");
 				System.out.println("2) Record Expense");
-				System.out.println("3) Set Budget Goal");
-				System.out.println("4) View Your Transaction Report");
+				System.out.println("3) Delete Last Transaction");
+				System.out.println("4) Reset Budget Goal");
+				System.out.println("5) View Your Transaction Report");
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
 	
@@ -148,8 +149,12 @@ public class User implements HasMenu{
 	
 					System.out.println("\nExpense recorded!");
 				}
-	
+				
 				else if (choice.equals("3")){
+					this.personalTracker.removeLastTran();
+				}
+
+				else if (choice.equals("4")){
 					System.out.print("Enter your new savings goal: $");
 					double goal = this.getDouble();
 	
@@ -157,7 +162,7 @@ public class User implements HasMenu{
 					System.out.println("\nBudget goal updated!");
 				}
 	
-				else if (choice.equals("4")){
+				else if (choice.equals("5")){
 					this.getReport();
 					this.personalTracker.getTranSumary();
 				}
@@ -168,7 +173,7 @@ public class User implements HasMenu{
 				}	
 	
 				else{
-					System.out.println("\nInvalid choice. Please enter a number 0-4.");
+					System.out.println("\nInvalid choice. Please enter a number 0-5.");
 				}
 			}
 		}
@@ -206,6 +211,7 @@ public class User implements HasMenu{
 					System.out.println("\n---Household Transactions---");
 			
 					for (User user : familyMembers){
+						System.out.println("\n---" + user.username + "'s Transactions---");
 						user.getReport();			
 					}					
 				}
@@ -274,24 +280,6 @@ public class User implements HasMenu{
 							i++;
 						}
                                                 
-						/*for (User user : this.familyMembers){
-                                                        if (user.getUsername().equals(username)){
-								if (user == this){
-									System.out.println("You cannot remove yourself from your own household!");
-                                        			}
-
-								else {
-									this.familyMembers.remove(user);
-									System.out.println(username + " has been removed from your household.");
-								}
-
-								found = true;
-								keepGoing4 = false;
-                                                        }
-                                                }
-
-						*/
-
                                                 if (!found){
                                                         System.out.println("\nThe user you are looking for is not in your household. Try again!");
                                                 }
@@ -307,13 +295,29 @@ public class User implements HasMenu{
 					System.out.println("\nInvalid choice. Please enter a number 0-4.");	
 				}
 			}
-		}	
-		else if (choice.equals("6")){
+		}
+
+		else if (choice.equals("3")){
+			System.out.println("\n---DELETE ACCOUNT---");
+			System.out.print("\nWARNING: Are you SURE you want to delete your account? Enter your password to confirm: ");
+			String password = input.nextLine();
+
+			if (password.equals(this.password)){
+				for (User user : Main.masterList){
+					user.familyMembers.remove(this);
+				}
+
+				Main.masterList.remove(this);
+				System.out.println("Account permanently deleted. We're sad to see you go!");
+			}
+		}
+
+		else if (choice.equals("0")){
 			System.out.println("Logging out");
 		}
 
 		else {
-		System.out.println("\nInvalid choice. Please enter a number 0-2.");
+		System.out.println("\nInvalid choice. Please enter a number 0-3.");
 		}
 	}
 }
