@@ -88,7 +88,7 @@ public class PersonalTracker{
 		this.formattedBalance = String.format("%.2f", getBalance());
 
 		System.out.println("\n--- Budget Overview ---");
-                System.out.println("Target Balance: $" + this.formattedBalanceGoal);
+                System.out.println("Budget amount: $" + this.formattedBalanceGoal);
                 System.out.println("Current Balance: $" + this.formattedBalance);
 	
 		if (balance < 0){

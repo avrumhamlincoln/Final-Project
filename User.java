@@ -17,7 +17,7 @@ public class User implements HasMenu{
 		System.out.print("Create a Password: ");
 		this.password = input.nextLine();
 
-		System.out.print("Set your initial savings goal: $");
+		System.out.print("Set your Budget: $");
 		double goal = this.getDouble();
 
 		System.out.println("\nProfile created successfully for " + this.username + "! Nice to meet you ;)");
@@ -109,7 +109,7 @@ public class User implements HasMenu{
 				System.out.println("1) Record Income");
 				System.out.println("2) Record Expense");
 				System.out.println("3) Delete Last Transaction");
-				System.out.println("4) Reset Budget Goal");
+				System.out.println("4) Change Budget Amount");
 				System.out.println("5) View Your Transaction Report");
 				System.out.println("0) Logout");
 				System.out.print("Choice: ");
@@ -156,7 +156,7 @@ public class User implements HasMenu{
 				}
 
 				else if (choice.equals("4")){
-					System.out.print("Enter your new savings goal: $");
+					System.out.print("Enter your new budget: $");
 					double goal = this.getDouble();
 	
 					this.personalTracker.setBalanceGoal(goal);
