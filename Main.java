@@ -1,8 +1,10 @@
 import java.util.*;
+import java.io.*;
 
 public class Main{
 	public static UserList masterList = new UserList();
 	public static void main(String[] args) {
+		load();
 		Scanner input = new Scanner(System.in);
 		boolean keepGoing = true;
 
@@ -42,15 +44,12 @@ public class Main{
 						}
 					}
 
-					else {
-						System.out.println("\nUsername not found. :/");
-						found = true;
-					}
+					i++;
 				}
-				/*
+
 				if (!found){
 					System.out.println("\nUsername not found. :/");
-				}*/
+				}
 			}
 
 			else if (choice.equals("2")){
@@ -66,6 +65,36 @@ public class Main{
 			else {
 				System.out.println("Invalid choice. Please enter 0-3.");
 			}
+		}
+
+		save();
+	}
+
+	public static void save(){
+		try{
+			FileOutputStream fo = new FileOutputStream("Buddy.dat");
+			ObjectOutputStream obOut = new ObjectOutputStream(fo);
+			obOut.writeObject(masterList);
+			obOut.close();
+			fo.close();
+		}
+
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public static void load(){
+		try{
+			FileInputStream fIn = new FileInputStream("Buddy.dat");
+			ObjectInputStream obIn = new ObjectInputStream(fIn);
+			masterList = (UserList) obIn.readObject();
+			obIn.close();
+			fIn.close();
+		}
+
+		catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 	}
 }

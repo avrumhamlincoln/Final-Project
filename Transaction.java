@@ -1,4 +1,6 @@
-public class Transaction{
+import java.io.*;
+
+public class Transaction implements Serializable{
 	private String date;
 	private double amount;
 	private String memo;

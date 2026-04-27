@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.*;
 
-public class User implements HasMenu{
+public class User implements HasMenu, Serializable{
 	protected String username;
 	protected String password;
 	protected PersonalTracker personalTracker;
@@ -249,12 +250,20 @@ public class User implements HasMenu{
 							keepGoing3 = false;
 							found = true;
 						}
-	
+
 						for (User user : Main.masterList){
 							if (user.getUsername().equals(username)){
-								this.addFamilyMember(user);
 								found = true;
-								keepGoing3 = false;
+
+								if (!user.familyMembers.isEmpty()) {
+									System.out.println("\n" + user.getUsername() + " is already part of another household!");
+									System.out.println("They must leave their current household before they can join yours.");
+								}
+
+								else {
+									this.addFamilyMember(user);
+									keepGoing3 = false;
+								}
 							}
 						}
 		

@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.*;
 
-public class PersonalTracker{
+public class PersonalTracker implements Serializable{
 	private double balanceGoal;
 	public double balance;
 	private TransList transactions;
@@ -100,22 +101,22 @@ public class PersonalTracker{
 			System.out.println("\nYou are in the negative!!! Save money quick to return to the positives!");
 		}
 
-		else if (balance > balanceGoal){
+		else if (getBalance()  > balanceGoal){
                          double over;
                          over = getBalance() - balanceGoal;
 			 String overf = String.format("%.2f", over);
-                         System.out.println("You are $" + overf + " over budget!\n");
+                         System.out.println("You are $" + overf + " over your goal!\n");
                 }
 
-		else if (balance == balanceGoal){
+		else if (getBalance() == balanceGoal){
                         System.out.println("\nYou are at your budget goal! You are exactly where you wanted to be. Give yourelf a pat on the back!\n");
                 }
 
-		else if (balance <  balanceGoal){
+		else if (getBalance() <  balanceGoal){
                         double under;
                         under = balanceGoal - getBalance();
 			String underf = String.format("%.2f", under);
-                        System.out.println("You are $" + underf + " under budget!\n");
+                        System.out.println("You are $" + underf + " under your goal!\n");
 		}
 	}
 }
