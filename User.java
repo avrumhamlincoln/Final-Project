@@ -198,7 +198,7 @@ public class User implements HasMenu, Serializable{
 	
 				if (choice.equals("1")){
 					double grandTotal = 0.0;
-					grandTotal += this.personalTracker.getBalance();
+					//grandTotal += this.personalTracker.getBalance();
 	
 					for (User user : familyMembers){
 						PersonalTracker tracker  = user.getTracker();
@@ -255,7 +255,7 @@ public class User implements HasMenu, Serializable{
 							if (user.getUsername().equals(username)){
 								found = true;
 
-								if (!user.familyMembers.isEmpty()) {
+								if (user.familyMembers.size() > 1) {
 									System.out.println("\n" + user.getUsername() + " is already part of another household!");
 									System.out.println("They must leave their current household before they can join yours.");
 								}
