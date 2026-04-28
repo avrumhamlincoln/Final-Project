@@ -166,7 +166,7 @@ public class User implements HasMenu, Serializable{
 	
 				else if (choice.equals("5")){
 					this.getReport();
-					this.personalTracker.getTranSumary();
+					this.personalTracker.getTranSummary();
 				}
 	
 				else if (choice.equals("0")){

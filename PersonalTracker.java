@@ -89,7 +89,7 @@ public class PersonalTracker implements Serializable{
 		}
 	}
 
-	public void getTranSumary(){
+	public void getTranSummary(){
 		this.formattedBalanceGoal = String.format("%.2f", balanceGoal);
 		this.formattedBalance = String.format("%.2f", getBalance());
 
